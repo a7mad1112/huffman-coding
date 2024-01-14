@@ -10,6 +10,7 @@
 
 <body>
   <h1>Huffman Coding Demo</h1>
+  <h2>Sender</h2>
   <form>
     <label for="originalMessage">Original Message:</label><br>
     <textarea id="originalMessage"></textarea><br><br>
@@ -17,6 +18,12 @@
     <input type="file" id="fileInput"><br><br>
     <button id="send-btn">Send</button>
   </form>
+  <br><br>
+  <hr>
+  <br><br>
+  <h2>Receiver</h2>
+  <p id="encodedMsg">Encoded message: <span></span></p>
+  <p id="decodedMsg">Decoded message: <span></span></p>
 </body>
 
 <script defer type="module" src="./js/script.js"></script>
