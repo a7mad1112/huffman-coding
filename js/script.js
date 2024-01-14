@@ -4,6 +4,7 @@ const textarea = document.getElementById('originalMessage');
 const fileInput = document.getElementById('fileInput');
 const encodedMsg = document.querySelector('#encodedMsg > span');
 const decodedMsg = document.querySelector('#decodedMsg > span');
+const encodedFileInput = document.getElementById('encodedFileInput');
 fileInput.addEventListener('change', function selectedFileChanged() {
   if (this.files.length === 0) {
     console.error('No file selected.');
@@ -58,3 +59,19 @@ function downloadFile(msg, fileName) {
   link.download = fileName;
   link.click();
 }
+
+encodedFileInput.addEventListener('change', function selectedFileChanged() {
+  if (this.files.length === 0) {
+    console.error('No file selected.');
+    return;
+  }
+  let encodedFileContent;
+
+  const reader = new FileReader();
+  reader.onload = function fileReadCompleted() {
+    encodedFileContent = JSON.parse(reader.result);
+    encodedMsg.innerHTML = encodedFileContent.encodedMsg;
+    // decodedMsg = HuffmanTree.decode(encodedFileContent.encodedMsg, encodedFileContent.minHeap)
+  };
+  reader.readAsText(this.files[0]);
+});
