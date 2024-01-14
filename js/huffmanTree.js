@@ -60,9 +60,11 @@ export default class HuffmanTree {
       .join('');
   }
 
-  decode(encodedMessage) {
+  static decode(encodedMessage, heap) {
     let decoded = '';
-    let node = this.minHeap.heap[0];
+    console.log(heap)
+    console.log(encodedMessage)
+    let node = heap[0];
     for (const bit of encodedMessage) {
       node = bit === '0' ? node.left : node.right;
       if (node.character == null) {
@@ -71,7 +73,7 @@ export default class HuffmanTree {
         decoded += node.character;
       }
       if (node.left == null && node.right == null) {
-        node = this.minHeap.heap[0];
+        node = heap[0];
       }
     }
     return decoded;

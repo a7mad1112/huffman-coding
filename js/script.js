@@ -71,7 +71,8 @@ encodedFileInput.addEventListener('change', function selectedFileChanged() {
   reader.onload = function fileReadCompleted() {
     encodedFileContent = JSON.parse(reader.result);
     encodedMsg.innerHTML = encodedFileContent.encodedMsg;
-    // decodedMsg = HuffmanTree.decode(encodedFileContent.encodedMsg, encodedFileContent.minHeap)
+    console.log(encodedFileContent)
+    decodedMsg.innerHTML = HuffmanTree.decode(encodedFileContent.encodedMsg, encodedFileContent.huffmanTree)
   };
   reader.readAsText(this.files[0]);
 });
