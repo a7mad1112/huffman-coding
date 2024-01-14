@@ -4,6 +4,10 @@ export default class MinHeap {
   }
 
   // Helper Methods
+  // Root is at index 0 in array.
+  // Left child of i-th node is at (2*i + 1)th index.
+  // Right child of i-th node is at (2*i + 2)th index.
+  // Parent of i-th node is at (i-1)/2 index.
   getLeftChildIndex(parentIndex) {
     return 2 * parentIndex + 1;
   }
@@ -67,7 +71,11 @@ export default class MinHeap {
 
   heapifyUp() {
     let index = this.heap.length - 1;
-    while (this.hasParent(index) && this.parent(index) > this.heap[index]) {
+    // Compare using the custom comparison function
+    while (
+      this.hasParent(index) &&
+      this.compare(this.parent(index), this.heap[index]) > 0
+    ) {
       this.swap(this.getParentIndex(index), index);
       index = this.getParentIndex(index);
     }
@@ -77,13 +85,15 @@ export default class MinHeap {
     let index = 0;
     while (this.hasLeftChild(index)) {
       let smallerChildIndex = this.getLeftChildIndex(index);
+      // Compare using the custom comparison function
       if (
         this.hasRightChild(index) &&
-        this.rightChild(index) < this.leftChild(index)
+        this.compare(this.rightChild(index), this.leftChild(index)) < 0
       ) {
         smallerChildIndex = this.getRightChildIndex(index);
       }
-      if (this.heap[index] < this.heap[smallerChildIndex]) {
+      // Compare using the custom comparison function
+      if (this.compare(this.heap[index], this.heap[smallerChildIndex]) < 0) {
         break;
       } else {
         this.swap(index, smallerChildIndex);
@@ -92,10 +102,15 @@ export default class MinHeap {
     }
   }
 
+  // Custom comparison function based on the frequency of HuffmanNodes
+  compare(nodeA, nodeB) {
+    return nodeA.frequency - nodeB.frequency;
+  }
+
   printHeap() {
-    var heap = ` ${this.heap[0]} `;
+    var heap = ` ${JSON.stringify(this.heap[0])} `;
     for (var i = 1; i < this.heap.length; i++) {
-      heap += ` ${this.heap[i]} `;
+      heap += ` ${JSON.stringify(this.heap[i])} `;
     }
     console.log(heap);
   }
