@@ -10,9 +10,13 @@
 
 <body>
   <h1>Huffman Coding Demo</h1>
-  <label for="originalMessage">Original Message:</label><br>
-  <textarea id="originalMessage" readonly></textarea><br><br>
-  <button id="send-btn">Send and Save</button>
+  <form>
+    <label for="originalMessage">Original Message:</label><br>
+    <textarea id="originalMessage"></textarea><br><br>
+    <label for="fileInput">Or upload txt file</label>
+    <input type="file" id="fileInput"><br><br>
+    <button id="send-btn">Send and Save</button>
+  </form>
 </body>
 
 <script defer type="module" src="./js/script.js"></script>
