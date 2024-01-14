@@ -108,10 +108,10 @@ export default class MinHeap {
   }
 
   printHeap() {
-    var heap = ` ${JSON.stringify(this.heap[0])} `;
+    let minH = ` ${JSON.stringify(this.heap[0])} `;
     for (var i = 1; i < this.heap.length; i++) {
-      heap += ` ${JSON.stringify(this.heap[i])} `;
+      minH += ` ${JSON.stringify(this.heap[i])} `;
     }
-    console.log(heap);
+    console.log(minH);
   }
 }
