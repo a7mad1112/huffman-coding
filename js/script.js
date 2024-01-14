@@ -26,8 +26,11 @@ sendBtn.onclick = (e) => {
   const huffmanTree = new HuffmanTree();
   const frequencies = convertTextIntoFrequencies(textarea.value);
   huffmanTree.buildTree(frequencies);
-  encodedMsg.innerHTML = huffmanTree.encode(textarea.value);
-  decodedMsg.innerHTML = huffmanTree.decode(encodedMsg.innerHTML);
+  let jsonFile = {};
+  jsonFile.encodedMsg = huffmanTree.encode(textarea.value);
+  jsonFile.huffmanTree = huffmanTree.minHeap.heap;
+  jsonFile = JSON.stringify(jsonFile);
+  downloadFile(jsonFile, 'encodedMsg.json');
   textarea.value = '';
   fileInput.value = null;
 };
@@ -47,3 +50,11 @@ const convertTextIntoFrequencies = (txt) => {
   }
   return frequencies;
 };
+
+function downloadFile(msg, fileName) {
+  const blob = new Blob([msg], { type: 'text/plain' });
+  const link = document.createElement('a');
+  link.href = window.URL.createObjectURL(blob);
+  link.download = fileName;
+  link.click();
+}
