@@ -62,8 +62,6 @@ export default class HuffmanTree {
 
   static decode(encodedMessage, heap) {
     let decoded = '';
-    console.log(heap)
-    console.log(encodedMessage)
     let node = heap[0];
     for (const bit of encodedMessage) {
       node = bit === '0' ? node.left : node.right;

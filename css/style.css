@@ -1,11 +1,36 @@
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin: 50px;
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  background-color: #0a0a0a;
+  color: #fff;
+}
+header {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  color: white;
+  background-color: #001f3f;
+  position: sticky;
+  z-index: 999;
+  top: -0px;
 }
 textarea {
-  width: 80%;
+  width: 96%;
+  border: none;
+  max-width: 100%;
+  resize: none;
+  outline: none;
   height: 100px;
+  background-color: #0a0a0a;
+  color: white;
+  padding: 10px;
+}
+legend,
+fieldset {
+  color: white;
+  font-size: 1rem;
+}
+textarea:focus {
+  outline: none;
 }
 button {
   padding: 10px;
@@ -16,4 +41,101 @@ button {
 p > span {
   color: brown;
   font-weight: bolder;
+}
+p {
+  text-align: left;
+}
+input[type='file'] {
+  font-family: calibri;
+  width: 200px;
+  padding: 10px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  border: 1px dashed #bbb;
+  text-align: center;
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+/* btn animation */
+
+.btn {
+  color: white;
+  padding: 1rem 2.8rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.btn-masterful {
+  background-color: #dddddd;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+  transition: 1s;
+  margin-top: 20px;
+}
+
+.btn-masterful .icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  font-size: 24px;
+}
+.btn-masterful .btn-txt {
+  padding-left: 0.5rem;
+}
+.btn-masterful:hover {
+  box-shadow: -1px 1px 14px 0px #001f3f;
+  background-color: #001f3f;
+}
+
+.btn-masterful:hover .icon {
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+.attribute {
+  position: absolute;
+  bottom: 10px;
+}
+
+.grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, 35%);
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  width: fit-content;
+}
+.box:nth-child(1) {
+  text-align: left;
+  margin-left: auto;
+}
+
+.box:nth-child(2) {
+  text-align: right;
+}
+.from-right {
+  width: 100%;
+}
+section {
+  padding: 50px 0;
 }

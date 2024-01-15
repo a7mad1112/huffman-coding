@@ -71,8 +71,23 @@ encodedFileInput.addEventListener('change', function selectedFileChanged() {
   reader.onload = function fileReadCompleted() {
     encodedFileContent = JSON.parse(reader.result);
     encodedMsg.innerHTML = encodedFileContent.encodedMsg;
-    console.log(encodedFileContent)
-    decodedMsg.innerHTML = HuffmanTree.decode(encodedFileContent.encodedMsg, encodedFileContent.huffmanTree)
+    console.log(encodedFileContent);
+    decodedMsg.innerHTML = HuffmanTree.decode(
+      encodedFileContent.encodedMsg,
+      encodedFileContent.huffmanTree
+    );
+    document.getElementById('decodedBitsNumber').innerHTML = `
+      <h3 id="decodedBitsNumber">${
+        decodedMsg.innerHTML.toString().length * 8
+      } <sub>bit</sub></h3>
+      `;
+    decodedMsg.innerHTML.toString().length * 8;
+
+    document.getElementById('encodedBitsNumber').innerHTML = `
+      <h3 id="encodedBitsNumber">${
+        encodedMsg.innerHTML.toString().length
+      } <sub>bit</sub></h3>
+      `;
   };
   reader.readAsText(this.files[0]);
 });

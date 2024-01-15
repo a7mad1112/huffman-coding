@@ -6,26 +6,85 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Huffman Coding Demo</title>
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="./css/card.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
-  <h1>Huffman Coding Demo</h1>
-  <h2>Sender</h2>
-  <form>
-    <label for="originalMessage">Original Message:</label><br>
-    <textarea id="originalMessage"></textarea><br><br>
-    <label for="fileInput">Or upload txt file</label>
-    <input type="file" id="fileInput"><br><br>
-    <button id="send-btn">Send</button>
-  </form>
-  <br><br>
-  <hr>
-  <br><br>
-  <h2>Receiver</h2>
-  <label for="encodedFileInput">Upload json file</label>
-  <input type="file" id="encodedFileInput"><br><br>
-  <p id="encodedMsg">Encoded message: <span></span></p>
-  <p id="decodedMsg">Decoded message: <span></span></p>
+  <header>
+    <h1>Huffman Coding Demo</h1>
+  </header>
+  <section>
+    <div class="container">
+      <div class="heading">
+        Sender
+        <hr>
+      </div>
+      <form class="grid">
+        <div class="box from-right">
+          <fieldset style="text-align: left;">
+            <legend>Original Message:
+            </legend>
+            <textarea id="originalMessage"></textarea>
+          </fieldset>
+        </div>
+
+        <div class="box">
+          <label class="" for="fileInput">Or upload txt file </label>
+          &ThinSpace;
+          <input type="file" id="fileInput"><br><br>
+          <button id="send-btn" class="btn btn-masterful">
+            <span class="icon">&#x1F680;</span>
+            <span class="btn-txt">Send!</span>
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="heading">
+        Receiver
+        <hr>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="box">
+        <label for="encodedFileInput">Upload json file</label>
+        &ThinSpace;
+        <input type="file" id="encodedFileInput">
+      </div>
+      <div class="box">
+        <p id="encodedMsg">Encoded message: <span></span></p>
+        <p id="decodedMsg">Decoded message: <span></span></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="heading">
+        Msg Information
+        <hr>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <h3 id="encodedBitsNumber">? <sub>bit</sub></h3>
+          <p>Encoded</p>
+        </div>
+        <div class="card">
+          <h3 id="decodedBitsNumber">? <sub>bit</sub></h3>
+          <p>Decoded</p>
+        </div>
+      </div>
+    </div>
+  </section>
 </body>
 
 <script defer type="module" src="./js/script.js"></script>
