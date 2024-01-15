@@ -26,6 +26,18 @@ sendBtn.onclick = (e) => {
   }
   const huffmanTree = new HuffmanTree();
   const frequencies = convertTextIntoFrequencies(textarea.value);
+  // update the table to show each character with frequencies
+  document.getElementById('table-body').innerHTML = Object.entries(
+    frequencies
+  ).reduce((acc, curr) => {
+    acc += `
+      <tr>
+        <td>${curr[0]}</td>
+        <td>${curr[1]}</td>
+      </tr>`;
+    return acc;
+  }, '');
+
   huffmanTree.buildTree(frequencies);
   let jsonFile = {};
   jsonFile.encodedMsg = huffmanTree.encode(textarea.value);

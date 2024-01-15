@@ -71,6 +71,7 @@ hr {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  margin: 30px 0;
 }
 .card h3 {
   font-size: 3.5rem;
@@ -151,6 +152,7 @@ label,
 p,
 h1,
 h2,
+h3,
 button {
   animation: glow-label 5s infinite;
 }

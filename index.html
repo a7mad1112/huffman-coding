@@ -73,6 +73,11 @@
         Msg Information
         <hr>
       </div>
+      <p>In Huffman coding, the size of the encoded message is typically expected to be smaller than the original
+        message, especially when the message contains repeated characters. This is achieved by assigning shorter codes
+        to more frequent characters. Below, you'll find a comparison of the original message size and the encoded
+        message size. The first card displays the size of the encoded message in bits, and the second card shows the
+        size of the original message. Observe the size reduction achieved through the Huffman coding process.</p>
       <div class="cards">
         <div class="card">
           <h3 id="encodedBitsNumber">? <sub>bit</sub></h3>
@@ -83,6 +88,21 @@
           <p>Decoded</p>
         </div>
       </div>
+      <h3 style="margin: 25px 0 10px;">Msg in Table:</h3>
+      <table border="0" class="card">
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Frequency</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <tr>
+            <td>?</td>
+            <td>?</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </section>
 </body>
