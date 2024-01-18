@@ -15,6 +15,10 @@ export default class MinHeap {
   // right child of i-th node is at (2*i + 2)th index.
   // parent of i-th node is at (i-1)/2 index.
 
+  size() {
+    return this.#heap.length;
+  }
+
   //? methods to get the indexes of items
   getLeftChildIndex(parentIndex) {
     return 2 * parentIndex + 1;
