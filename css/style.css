@@ -150,3 +150,8 @@ td {
   border-bottom: 3px solid #dddddd;
   padding: 5px;
 }
+
+
+p {
+  line-height: 1.5;
+}

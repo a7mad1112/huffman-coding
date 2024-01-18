@@ -10,7 +10,10 @@ class HuffmanNode {
 
 export default class HuffmanTree {
   constructor() {
-    this.minHeap = new MinHeap();
+    // passing a comparison function based on frequency
+    this.minHeap = new MinHeap(
+      (nodeA, nodeB) => nodeA.frequency - nodeB.frequency
+    );
     this.codes = {};
   }
 

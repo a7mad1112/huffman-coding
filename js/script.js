@@ -83,7 +83,7 @@ encodedFileInput.addEventListener('change', function selectedFileChanged() {
   reader.onload = function fileReadCompleted() {
     encodedFileContent = JSON.parse(reader.result);
     encodedMsg.innerHTML = encodedFileContent.encodedMsg;
-    console.log(encodedFileContent);
+    // console.log(encodedFileContent);
     decodedMsg.innerHTML = HuffmanTree.decode(
       encodedFileContent.encodedMsg,
       encodedFileContent.huffmanTree

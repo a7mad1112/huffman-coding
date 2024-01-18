@@ -1,13 +1,21 @@
 export default class MinHeap {
-  constructor() {
-    this.heap = [];
+  //? # in javaScript means a private member
+  #heap;
+  #compare;
+  constructor(compareFunction = (a, b) => a - b) {
+    this.#heap = [];
+    // the defalut behavior of compare function is to compare two numbers
+    // (in some cases the programmer need deal with objects comparisons)
+    this.#compare = compareFunction;
   }
 
-  // Helper Methods
-  // Root is at index 0 in array.
-  // Left child of i-th node is at (2*i + 1)th index.
-  // Right child of i-th node is at (2*i + 2)th index.
-  // Parent of i-th node is at (i-1)/2 index.
+  // heap based array formula:
+  // root is at index 0 in array.
+  // left child of i-th node is at (2*i + 1)th index.
+  // right child of i-th node is at (2*i + 2)th index.
+  // parent of i-th node is at (i-1)/2 index.
+
+  //? methods to get the indexes of items
   getLeftChildIndex(parentIndex) {
     return 2 * parentIndex + 1;
   }
@@ -17,101 +25,102 @@ export default class MinHeap {
   getParentIndex(childIndex) {
     return Math.floor((childIndex - 1) / 2);
   }
+
+  //? mtehods to check items if exist or not
   hasLeftChild(index) {
-    return this.getLeftChildIndex(index) < this.heap.length;
+    return this.getLeftChildIndex(index) < this.#heap.length;
   }
   hasRightChild(index) {
-    return this.getRightChildIndex(index) < this.heap.length;
+    return this.getRightChildIndex(index) < this.#heap.length;
   }
   hasParent(index) {
     return this.getParentIndex(index) >= 0;
   }
+
+  //? a methods to get the items (accessors)
   leftChild(index) {
-    return this.heap[this.getLeftChildIndex(index)];
+    if (this.hasLeftChild(index))
+      return this.#heap[this.getLeftChildIndex(index)];
+    return null;
   }
   rightChild(index) {
-    return this.heap[this.getRightChildIndex(index)];
+    if (this.hasRightChild(index))
+      return this.#heap[this.getRightChildIndex(index)];
+    return null;
   }
   parent(index) {
-    return this.heap[this.getParentIndex(index)];
+    if (this.hasParent(index)) return this.#heap[this.getParentIndex(index)];
+    return null;
   }
 
   // Functions to create Min Heap
-
-  swap(indexOne, indexTwo) {
-    const temp = this.heap[indexOne];
-    this.heap[indexOne] = this.heap[indexTwo];
-    this.heap[indexTwo] = temp;
+  #swap(indexOne, indexTwo) {
+    [this.#heap[indexOne], this.#heap[indexTwo]] = [
+      this.#heap[indexTwo],
+      this.#heap[indexOne],
+    ];
   }
 
   peek() {
-    if (this.heap.length === 0) {
+    if (this.#heap.length === 0) {
       return null;
     }
-    return this.heap[0];
+    return this.#heap[0];
   }
 
-  // Removing an element will remove the
-  // top element with highest priority
+  // remove an element will remove the
+  // top element with highest priority(the minimum value is the highest priority)
   remove() {
-    if (this.heap.length === 0) {
+    if (this.#heap.length === 0) {
       return null;
     }
-    const item = this.heap[0];
-    this.heap[0] = this.heap[this.heap.length - 1];
-    this.heap.pop();
-    this.heapifyDown();
+    const item = this.#heap[0];
+    this.#heap[0] = this.#heap[this.#heap.length - 1];
+    this.#heap.pop();
+    this.#heapifyDown();
     return item;
   }
 
   add(item) {
-    this.heap.push(item);
-    this.heapifyUp();
+    this.#heap.push(item);
+    this.#heapifyUp();
   }
 
-  heapifyUp() {
-    let index = this.heap.length - 1;
-    // Compare using the custom comparison function
+  //? after adding an element, the heap tree have to be maintained. this method is responsible to do this
+  #heapifyUp() {
+    let index = this.#heap.length - 1;
     while (
       this.hasParent(index) &&
-      this.compare(this.parent(index), this.heap[index]) > 0
+      this.#compare(this.parent(index), this.#heap[index]) > 0
     ) {
-      this.swap(this.getParentIndex(index), index);
+      this.#swap(this.getParentIndex(index), index);
       index = this.getParentIndex(index);
     }
   }
 
-  heapifyDown() {
+  //? after removing an element, the heap tree have to be maintained. this method is responsible to do this
+  #heapifyDown() {
     let index = 0;
     while (this.hasLeftChild(index)) {
-      let smallerChildIndex = this.getLeftChildIndex(index);
-      // Compare using the custom comparison function
+      let smallChildIndex = this.getLeftChildIndex(index);
       if (
         this.hasRightChild(index) &&
-        this.compare(this.rightChild(index), this.leftChild(index)) < 0
+        // comparing the left with the right, if the left smaller then the value in comparison will be negative
+        this.#compare(this.rightChild(index), this.leftChild(index)) < 0
       ) {
-        smallerChildIndex = this.getRightChildIndex(index);
+        smallChildIndex = this.getRightChildIndex(index);
       }
-      // Compare using the custom comparison function
-      if (this.compare(this.heap[index], this.heap[smallerChildIndex]) < 0) {
+      if (this.#compare(this.#heap[index], this.#heap[smallChildIndex]) < 0) {
         break;
       } else {
-        this.swap(index, smallerChildIndex);
+        this.#swap(index, smallChildIndex);
       }
-      index = smallerChildIndex;
+      index = smallChildIndex;
     }
-  }
-
-  // Custom comparison function based on the frequency of HuffmanNodes
-  compare(nodeA, nodeB) {
-    return nodeA.frequency - nodeB.frequency;
   }
 
   printHeap() {
-    let minH = ` ${JSON.stringify(this.heap[0])} `;
-    for (var i = 1; i < this.heap.length; i++) {
-      minH += ` ${JSON.stringify(this.heap[i])} `;
-    }
-    console.log(minH);
+    const minHeapString = this.#heap.join(', ');
+    console.log(minHeapString);
   }
 }
