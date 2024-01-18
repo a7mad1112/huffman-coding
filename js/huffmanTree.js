@@ -25,13 +25,15 @@ export default class HuffmanTree {
     C: 1
   }
   */
+
   buildTree(frequencies) {
     // create leaf node for each character and add it to the MinHeap
     for (const [character, frequency] of Object.entries(frequencies)) {
       const newNode = new HuffmanNode(character, frequency);
       this.minHeap.add(newNode);
     }
-    while (this.minHeap.size > 1) {
+    // build the huffman tree
+    while (this.minHeap.heap.length > 1) {
       const left = this.minHeap.remove();
       const right = this.minHeap.remove();
       const merged = new HuffmanNode(null, left.frequency + right.frequency);

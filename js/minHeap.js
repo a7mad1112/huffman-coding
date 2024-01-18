@@ -1,14 +1,13 @@
 export default class MinHeap {
   //? # in javaScript means a private member
-  #heap;
+  heap;
   #compare;
   constructor(compareFunction = (a, b) => a - b) {
-    this.#heap = [];
+    this.heap = [];
     // the defalut behavior of compare function is to compare two numbers
     // (in some cases the programmer need deal with objects comparisons)
     this.#compare = compareFunction;
   }
-
   // heap based array formula:
   // root is at index 0 in array.
   // left child of i-th node is at (2*i + 1)th index.
@@ -16,7 +15,7 @@ export default class MinHeap {
   // parent of i-th node is at (i-1)/2 index.
 
   size() {
-    return this.#heap.length;
+    return this.heap.length;
   }
 
   //? methods to get the indexes of items
@@ -32,10 +31,10 @@ export default class MinHeap {
 
   //? mtehods to check items if exist or not
   hasLeftChild(index) {
-    return this.getLeftChildIndex(index) < this.#heap.length;
+    return this.getLeftChildIndex(index) < this.heap.length;
   }
   hasRightChild(index) {
-    return this.getRightChildIndex(index) < this.#heap.length;
+    return this.getRightChildIndex(index) < this.heap.length;
   }
   hasParent(index) {
     return this.getParentIndex(index) >= 0;
@@ -44,58 +43,58 @@ export default class MinHeap {
   //? a methods to get the items (accessors)
   leftChild(index) {
     if (this.hasLeftChild(index))
-      return this.#heap[this.getLeftChildIndex(index)];
+      return this.heap[this.getLeftChildIndex(index)];
     return null;
   }
   rightChild(index) {
     if (this.hasRightChild(index))
-      return this.#heap[this.getRightChildIndex(index)];
+      return this.heap[this.getRightChildIndex(index)];
     return null;
   }
   parent(index) {
-    if (this.hasParent(index)) return this.#heap[this.getParentIndex(index)];
+    if (this.hasParent(index)) return this.heap[this.getParentIndex(index)];
     return null;
   }
 
   // Functions to create Min Heap
   #swap(indexOne, indexTwo) {
-    [this.#heap[indexOne], this.#heap[indexTwo]] = [
-      this.#heap[indexTwo],
-      this.#heap[indexOne],
+    [this.heap[indexOne], this.heap[indexTwo]] = [
+      this.heap[indexTwo],
+      this.heap[indexOne],
     ];
   }
 
   peek() {
-    if (this.#heap.length === 0) {
+    if (this.heap.length === 0) {
       return null;
     }
-    return this.#heap[0];
+    return this.heap[0];
   }
 
   // remove an element will remove the
   // top element with highest priority(the minimum value is the highest priority)
   remove() {
-    if (this.#heap.length === 0) {
+    if (this.heap.length === 0) {
       return null;
     }
-    const item = this.#heap[0];
-    this.#heap[0] = this.#heap[this.#heap.length - 1];
-    this.#heap.pop();
-    this.#heapifyDown();
+    const item = this.heap[0];
+    this.heap[0] = this.heap[this.heap.length - 1];
+    this.heap.pop();
+    this.heapifyDown();
     return item;
   }
 
   add(item) {
-    this.#heap.push(item);
-    this.#heapifyUp();
+    this.heap.push(item);
+    this.heapifyUp();
   }
 
   //? after adding an element, the heap tree have to be maintained. this method is responsible to do this
-  #heapifyUp() {
-    let index = this.#heap.length - 1;
+  heapifyUp() {
+    let index = this.heap.length - 1;
     while (
       this.hasParent(index) &&
-      this.#compare(this.parent(index), this.#heap[index]) > 0
+      this.#compare(this.parent(index), this.heap[index]) > 0
     ) {
       this.#swap(this.getParentIndex(index), index);
       index = this.getParentIndex(index);
@@ -103,18 +102,18 @@ export default class MinHeap {
   }
 
   //? after removing an element, the heap tree have to be maintained. this method is responsible to do this
-  #heapifyDown() {
+  heapifyDown() {
     let index = 0;
     while (this.hasLeftChild(index)) {
       let smallChildIndex = this.getLeftChildIndex(index);
       if (
         this.hasRightChild(index) &&
-        // comparing the left with the right, if the left smaller then the value in comparison will be negative
+        // comparing the left with the right, if the left smaller then the value in comparison will be positive
         this.#compare(this.rightChild(index), this.leftChild(index)) < 0
       ) {
         smallChildIndex = this.getRightChildIndex(index);
       }
-      if (this.#compare(this.#heap[index], this.#heap[smallChildIndex]) < 0) {
+      if (this.#compare(this.heap[index], this.heap[smallChildIndex]) < 0) {
         break;
       } else {
         this.#swap(index, smallChildIndex);
@@ -124,7 +123,7 @@ export default class MinHeap {
   }
 
   printHeap() {
-    const minHeapString = this.#heap.join(', ');
+    const minHeapString = this.heap.join(', ');
     console.log(minHeapString);
   }
 }

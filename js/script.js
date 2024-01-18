@@ -41,6 +41,8 @@ sendBtn.onclick = (e) => {
   huffmanTree.buildTree(frequencies);
   let jsonFile = {};
   jsonFile.encodedMsg = huffmanTree.encode(textarea.value);
+  console.log(jsonFile)
+  console.log(huffmanTree.minHeap)
   jsonFile.huffmanTree = huffmanTree.minHeap.heap;
   jsonFile = JSON.stringify(jsonFile);
   downloadFile(jsonFile, 'encodedMsg.json');
