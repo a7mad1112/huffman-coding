@@ -61,7 +61,7 @@ export default class HuffmanTree {
     return message
       .split('')
       .map((character) => this.codes[character])
-      .join('');
+      .join('');// ab => [a, b] => [010, 001] => 010001
   }
 
   static decode(encodedMessage, heap) {
